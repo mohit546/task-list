@@ -1,0 +1,57 @@
+﻿<style>
+    .deleteIcon {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        height: 20px;
+        width: 20px;
+        background-color: #f55e5e;
+        border-radius: 50%;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Hi {{currentUser.firstName}}!</h1>
+            <p>Welcome</p>
+            <h3>All Rentals</h3>
+        </div>
+        <div class="col-xs-4" *ngFor="let rental of rentals">
+            <div style="background-color: #fff; margin-bottom: 15px; position: relative;">
+                <div class="deleteIcon" (click)="deleteRental(rental.id)">X</div>
+                <img src="app/img/house.jpeg" alt="" style="width: 100%;">
+                <table class="table table-bordered" style="margin-bottom: 0;">
+                    <tbody>
+                        <tr>
+                            <td><strong>Title</strong></td>
+                            <td>{{rental.title}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Owner</strong></td>
+                            <td>{{rental.owner}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>City</strong></td>
+                            <td>{{rental.city}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Property Type</strong></td>
+                            <td>{{rental.propertyType}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bedrooms</strong></td>
+                            <td>{{rental.bedrooms}}</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"><strong>Description</strong></td>
+                            <td rowspan="3">{{rental.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
