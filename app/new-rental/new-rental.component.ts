@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService, UserService } from '../_services/index';
@@ -9,6 +9,8 @@ import { AlertService, UserService } from '../_services/index';
 })
 
 export class NewRentalComponent {
+    @ViewChild('fileInput') fileInput;
+
 	model: any = {};
 	loading = false;
 
@@ -18,16 +20,27 @@ export class NewRentalComponent {
 		private alertService: AlertService) { }
 
 	addNewRental() {
-		this.loading = true;
-        this.userService.addRental(this.model)
-        .subscribe(
-            data => {
+        let fileBrowser = this.fileInput.nativeElement;
+        if (fileBrowser.files && fileBrowser.files[0]) {
+    		this.loading = true;
+            var reader = new FileReader();
+            reader.onload =this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(fileBrowser.files[0]);
+            this.userService.addRental(this.model)
+            .subscribe(data => {
                 this.alertService.success('Rental added successfully', true);
                 this.router.navigate(['/']);
-            },
-            error => {
+            }, error => {
                 this.alertService.error(error);
                 this.loading = false;
             });
+        }else{
+            this.alertService.error('Please select image');
+        }
+    }
+
+  _handleReaderLoaded(readerEvt) {
+     var binaryString = readerEvt.target.result;
+        this.model['image'] = btoa(binaryString);
     }
 }
