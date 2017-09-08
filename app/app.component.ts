@@ -9,7 +9,7 @@ import { AuthenticationService } from './_services/index';
 export class AppComponent {
 	auth = false;
 	constructor(authService: AuthenticationService){
-		if(localStorage.getItem('currentUser')) this.auth = true;
-		authService.auth.subscribe(auth => console.log('auth ---> ', this.auth = auth;));
+		if(localStorage.getItem('currentUser')){ this.auth = true };
+		authService.auth.subscribe((auth:boolean) => {console.log('auth ---> ', this.auth = auth)});
 	}
 }

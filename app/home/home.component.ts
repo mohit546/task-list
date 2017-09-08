@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { User } from '../_models/index';
+import { User, Rental } from '../_models/index';
 import { AlertService, UserService } from '../_services/index';
 
 @Component({
@@ -11,6 +11,7 @@ import { AlertService, UserService } from '../_services/index';
 export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
+    rentals: Rental[] = [];
 
     constructor(
         private userService: UserService,
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
     deleteUser(id: number) {
         this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
     }
-    
+
     deleteRental(id: number) {
         this.userService.deleteRental(id).subscribe(() => { this.loadAllRentals() });
     }
