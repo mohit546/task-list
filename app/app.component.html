@@ -1,9 +1,22 @@
 ﻿<!-- main app container -->
-<div class="jumbotron">
-    <div class="container">
-        <div class="col-sm-8 col-sm-offset-2">
-            <alert></alert>
-            <router-outlet></router-outlet>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" [routerLink]="['/']">Rental</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="auth"><a [routerLink]="['/newrental']">Add Rental</a></li>
+                <li *ngIf="auth"><a [routerLink]="['/login']">Logout</a></li>
+            </ul>
         </div>
     </div>
-</div>
+</nav>
+<alert></alert>
+<router-outlet></router-outlet>
